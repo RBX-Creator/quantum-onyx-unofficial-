@@ -32,7 +32,6 @@
             align-items: center;
         }
 
-        /* Navbar mit Sprachauswahl */
         .navbar {
             width: 100%;
             background-color: var(--card-bg);
@@ -46,7 +45,6 @@
             z-index: 1000;
         }
 
-        /* Platzhalter für die Symmetrie auf Handys */
         .nav-spacer {
             width: 75px;
         }
@@ -78,7 +76,6 @@
             box-shadow: 0 0 15px rgba(216, 17, 89, 0.4);
         }
 
-        /* Sprach-Dropdown Style */
         .lang-select {
             background-color: #1c142e;
             color: var(--text-main);
@@ -91,7 +88,6 @@
             outline: none;
         }
 
-        /* Logo Bereich */
         .logo-section {
             display: flex;
             flex-direction: column;
@@ -219,7 +215,6 @@
             border-bottom: none;
         }
 
-        /* Script Kasten */
         .script-box {
             background-color: #08050e;
             border: 1px solid var(--border-color);
@@ -249,7 +244,6 @@
             margin-bottom: 15px;
         }
 
-        /* Buttons */
         .action-btn {
             width: 100%;
             background-color: var(--accent-color);
@@ -260,7 +254,7 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            transition: background-color 0.1s ease, transform 0.1s ease;
             box-shadow: 0 4px 15px rgba(123, 44, 191, 0.3);
         }
 
@@ -272,17 +266,30 @@
             background-color: #10b981 !important;
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
+
+        /* Safari Hinweis-Box Styling */
+        .safari-warning {
+            display: none;
+            background-color: rgba(216, 17, 89, 0.1);
+            border: 1px solid rgba(216, 17, 89, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: #ff477e;
+            line-height: 1.4;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
     <div class="navbar">
-        <div class="nav-spacer"></div> <!-- Hält die Mitte in Waage -->
+        <div class="nav-spacer"></div>
         <div class="nav-menu">
             <a href="#" class="nav-item active">Home</a>
             <a href="https://ads.luarmor.net/get_key?for=Quantum_Onyx_Key_Sytem-FpNBDhxVzYzS" target="_blank" class="nav-item premium-btn">Premium</a>
         </div>
-        <!-- Dropdown oben rechts auf der Webseite -->
         <select class="lang-select" onchange="changeLanguage(this.value)">
             <option value="en">EN 🇺🇸</option>
             <option value="de">DE 🇩🇪</option>
@@ -315,7 +322,6 @@
             </div>
         </div>
 
-        <!-- Features Liste -->
         <div class="section-title" id="titleFeatures">⚡ Script Features</div>
         <div class="features-list-card">
             <div class="feature-item"><span>✅ Fake Admin Panel</span></div>
@@ -324,7 +330,6 @@
             <div class="feature-item"><span>✅ all in one</span></div>
         </div>
 
-        <!-- Script Bereich -->
         <div class="section-title" id="titleScript">📜 Script Code</div>
         <div class="script-box">
             <div class="script-header">
@@ -335,19 +340,20 @@
             <button class="action-btn" id="copyBtn" onclick="copyScript()">Copy Script</button>
         </div>
 
-        <!-- Premium Box -->
         <div class="hero-card" style="border-left-color: #d81159; background: linear-gradient(to right, #1a0d22, #120d1e);">
             <div class="hero-title" id="premiumTitle" style="color: #ff477e;">👑 Get Quantum Onyx Premium</div>
             <div class="hero-desc" id="premiumDesc" style="margin-bottom: 15px;">
                 Unlock exclusive premium functions, faster speeds, and maximum performance. Click the button to start your key system directly.
             </div>
             <button class="action-btn" style="background: linear-gradient(135deg, #d81159, #b5179e); box-shadow: 0 4px 15px rgba(216,17,89,0.3);" onclick="window.open('https://ads.luarmor.net/get_key?for=Quantum_Onyx_Key_Sytem-FpNBDhxVzYzS', '_blank')">Get Premium Key</button>
+            
+            <!-- Die automatische Hinweis-Box -->
+            <div class="safari-warning" id="safariAlert"></div>
         </div>
 
     </div>
 
     <script>
-        // Die Texte für beide Sprachen gesichert hinterlegt
         const translations = {
             en: {
                 heroDesc: "The ultimate, high-performance script hub for Blox Fruits. Built for maximum speed, absolute stability, and packed with features that will take your gameplay to the next level. Check out the user interface and key features below!",
@@ -357,7 +363,8 @@
                 copyBtn: "Copy Script",
                 copySuccess: "Copied! ✅",
                 premiumTitle: "👑 Get Quantum Onyx Premium",
-                premiumDesc: "Unlock exclusive premium functions, faster speeds, and maximum performance. Click the button to start your key system directly."
+                premiumDesc: "Unlock exclusive premium functions, faster speeds, and maximum performance. Click the button to start your key system directly.",
+                safariText: "⚠️ <b>Safari / TikTok User:</b> If the Key link doesn't open properly, please copy this website URL and open it inside the <b>Google App</b> or <b>Chrome</b>!"
             },
             de: {
                 heroDesc: "Das ultimative, leistungsstarke Script-Hub für Blox Fruits. Entwickelt für maximale Geschwindigkeit, absolute Stabilität und vollgepackt mit Features, die dein Gameplay auf das nächste Level bringen. Schau dir unten die Benutzeroberfläche und die wichtigsten Features an!",
@@ -367,11 +374,20 @@
                 copyBtn: "Script kopieren",
                 copySuccess: "Kopiert! ✅",
                 premiumTitle: "👑 Hol dir Quantum Onyx Premium",
-                premiumDesc: "Schalte exklusive Premium-Funktionen, schnellere Geschwindigkeiten und maximale Performance frei. Klicke auf den Button, um direkt dein Key-System zu starten."
+                premiumDesc: "Schalte exklusive Premium-Funktionen, schnellere Geschwindigkeiten und maximale Performance frei. Klicke auf den Button, um direkt dein Key-System zu starten.",
+                safariText: "⚠️ <b>Safari / TikTok Nutzer:</b> Falls der Key-Link nicht richtig lädt, kopiere die URL dieser Webseite und öffne sie in der <b>Google App</b> oder <b>Chrome</b>!"
             }
         };
 
-        let currentLang = 'en'; // Startet standardmäßig auf Englisch
+        let currentLang = 'en';
+
+        // Erkennt ob es ein Apple-Gerät (iOS) ist
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (isIOS) {
+            const alertBox = document.getElementById('safariAlert');
+            alertBox.style.display = 'block';
+            alertBox.innerHTML = translations[currentLang].safariText;
+        }
 
         function changeLanguage(lang) {
             currentLang = lang;
@@ -382,34 +398,37 @@
             document.getElementById('copyBtn').innerText = translations[lang].copyBtn;
             document.getElementById('premiumTitle').innerText = translations[lang].premiumTitle;
             document.getElementById('premiumDesc').innerText = translations[lang].premiumDesc;
+            if (isIOS) {
+                document.getElementById('safariAlert').innerHTML = translations[lang].safariText;
+            }
         }
 
         function copyScript() {
             const codeText = document.getElementById('scriptCode').innerText;
             const btn = document.getElementById('copyBtn');
             
-            navigator.clipboard.withText ? navigator.clipboard.writeText(codeText) : (function() {
-                const area = document.createElement('textarea');
-                area.value = codeText; document.body.appendChild(area); area.select();
-                document.execCommand('copy'); document.body.removeChild(area);
-            })();
+            // SOFORTIGES VISUELLES FEEDBACK (Keine Millisekunde Verzögerung mehr)
+            btn.classList.add('copied');
+            btn.innerText = translations[currentLang].copySuccess;
 
-            navigator.clipboard.writeText(codeText).then(() => {
-                btn.classList.add('copied');
-                btn.innerText = translations[currentLang].copySuccess;
-                
-                setTimeout(() => {
-                    btn.classList.remove('copied');
-                    btn.innerText = translations[currentLang].copyBtn;
-                }, 2000);
-            }).catch(err => {
-                btn.classList.add('copied');
-                btn.innerText = translations[currentLang].copySuccess;
-                setTimeout(() => {
-                    btn.classList.remove('copied');
-                    btn.innerText = translations[currentLang].copyBtn;
-                }, 2000);
-            });
+            // Kopiervorgang läuft leise im Hintergrund mit alternativem Fallback
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(codeText).catch(() => {});
+            } else {
+                const area = document.createElement('textarea');
+                area.value = codeText;
+                area.style.position = 'fixed'; 
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand('copy');
+                document.body.removeChild(area);
+            }
+            
+            // Nach genau 2 Sekunden wieder zurücksetzen
+            setTimeout(() => {
+                btn.classList.remove('copied');
+                btn.innerText = translations[currentLang].copyBtn;
+            }, 2000);
         }
     </script>
 </body>
