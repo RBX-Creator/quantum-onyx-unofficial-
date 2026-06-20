@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,18 +32,23 @@
             align-items: center;
         }
 
-        /* Navbar zentriert */
+        /* Navbar mit Sprachauswahl */
         .navbar {
             width: 100%;
             background-color: var(--card-bg);
             border-bottom: 2px solid var(--border-color);
             padding: 15px 20px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
+        }
+
+        /* Platzhalter für die Symmetrie auf Handys */
+        .nav-spacer {
+            width: 75px;
         }
 
         .nav-menu {
@@ -71,6 +76,19 @@
             background: linear-gradient(135deg, #d81159, #7b2cbf);
             color: #fff;
             box-shadow: 0 0 15px rgba(216, 17, 89, 0.4);
+        }
+
+        /* Sprach-Dropdown Style */
+        .lang-select {
+            background-color: #1c142e;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            cursor: pointer;
+            outline: none;
         }
 
         /* Logo Bereich */
@@ -178,7 +196,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Features Liste Styling */
         .features-list-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -260,10 +277,16 @@
 <body>
 
     <div class="navbar">
+        <div class="nav-spacer"></div> <!-- Hält die Mitte in Waage -->
         <div class="nav-menu">
             <a href="#" class="nav-item active">Home</a>
             <a href="https://ads.luarmor.net/get_key?for=Quantum_Onyx_Key_Sytem-FpNBDhxVzYzS" target="_blank" class="nav-item premium-btn">Premium</a>
         </div>
+        <!-- Dropdown oben rechts auf der Webseite -->
+        <select class="lang-select" onchange="changeLanguage(this.value)">
+            <option value="en">EN 🇺🇸</option>
+            <option value="de">DE 🇩🇪</option>
+        </select>
     </div>
 
     <div class="logo-section">
@@ -275,9 +298,9 @@
     <div class="container">
         
         <div class="hero-card">
-            <div class="hero-title">⚔️ Quantum Onyx Project</div>
-            <div class="hero-desc">
-                Das ultimative, leistungsstarke Script-Hub für Blox Fruits. Entwickelt für maximale Geschwindigkeit, absolute Stabilität und vollgepackt mit Features, die dein Gameplay auf das nächste Level bringen. Schau dir unten die Benutzeroberfläche und die wichtigsten Features an!
+            <div class="hero-title" id="heroTitle">⚔️ Quantum Onyx Project</div>
+            <div class="hero-desc" id="heroDesc">
+                The ultimate, high-performance script hub for Blox Fruits. Built for maximum speed, absolute stability, and packed with features that will take your gameplay to the next level. Check out the user interface and key features below!
             </div>
             
             <div class="showcase-container">
@@ -292,8 +315,8 @@
             </div>
         </div>
 
-        <!-- Deine Features Liste -->
-        <div class="section-title">⚡ Script Features</div>
+        <!-- Features Liste -->
+        <div class="section-title" id="titleFeatures">⚡ Script Features</div>
         <div class="features-list-card">
             <div class="feature-item"><span>✅ Fake Admin Panel</span></div>
             <div class="feature-item"><span>✅ Auto all Sea Events</span></div>
@@ -301,11 +324,11 @@
             <div class="feature-item"><span>✅ all in one</span></div>
         </div>
 
-        <!-- Script Bereich mit dem kopierbaren Button -->
-        <div class="section-title">📜 Script Code</div>
+        <!-- Script Bereich -->
+        <div class="section-title" id="titleScript">📜 Script Code</div>
         <div class="script-box">
             <div class="script-header">
-                <span class="script-label">Main Script:</span>
+                <span class="script-label" id="scriptLabel">Main Script:</span>
             </div>
             <div class="code-container" id="scriptCode">loadstring(game:HttpGet("https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"))()</div>
             
@@ -314,9 +337,9 @@
 
         <!-- Premium Box -->
         <div class="hero-card" style="border-left-color: #d81159; background: linear-gradient(to right, #1a0d22, #120d1e);">
-            <div class="hero-title" style="color: #ff477e;">👑 Hol dir Quantum Onyx Premium</div>
-            <div class="hero-desc" style="margin-bottom: 15px;">
-                Schalte exklusive Premium-Funktionen, schnellere Geschwindigkeiten und maximale Performance frei. Klicke auf den Button, um direkt dein Key-System zu starten.
+            <div class="hero-title" id="premiumTitle" style="color: #ff477e;">👑 Get Quantum Onyx Premium</div>
+            <div class="hero-desc" id="premiumDesc" style="margin-bottom: 15px;">
+                Unlock exclusive premium functions, faster speeds, and maximum performance. Click the button to start your key system directly.
             </div>
             <button class="action-btn" style="background: linear-gradient(135deg, #d81159, #b5179e); box-shadow: 0 4px 15px rgba(216,17,89,0.3);" onclick="window.open('https://ads.luarmor.net/get_key?for=Quantum_Onyx_Key_Sytem-FpNBDhxVzYzS', '_blank')">Get Premium Key</button>
         </div>
@@ -324,6 +347,43 @@
     </div>
 
     <script>
+        // Die Texte für beide Sprachen gesichert hinterlegt
+        const translations = {
+            en: {
+                heroDesc: "The ultimate, high-performance script hub for Blox Fruits. Built for maximum speed, absolute stability, and packed with features that will take your gameplay to the next level. Check out the user interface and key features below!",
+                titleFeatures: "⚡ Script Features",
+                titleScript: "📜 Script Code",
+                scriptLabel: "Main Script:",
+                copyBtn: "Copy Script",
+                copySuccess: "Copied! ✅",
+                premiumTitle: "👑 Get Quantum Onyx Premium",
+                premiumDesc: "Unlock exclusive premium functions, faster speeds, and maximum performance. Click the button to start your key system directly."
+            },
+            de: {
+                heroDesc: "Das ultimative, leistungsstarke Script-Hub für Blox Fruits. Entwickelt für maximale Geschwindigkeit, absolute Stabilität und vollgepackt mit Features, die dein Gameplay auf das nächste Level bringen. Schau dir unten die Benutzeroberfläche und die wichtigsten Features an!",
+                titleFeatures: "⚡ Script Features",
+                titleScript: "📜 Script Code",
+                scriptLabel: "Main Script:",
+                copyBtn: "Script kopieren",
+                copySuccess: "Kopiert! ✅",
+                premiumTitle: "👑 Hol dir Quantum Onyx Premium",
+                premiumDesc: "Schalte exklusive Premium-Funktionen, schnellere Geschwindigkeiten und maximale Performance frei. Klicke auf den Button, um direkt dein Key-System zu starten."
+            }
+        };
+
+        let currentLang = 'en'; // Startet standardmäßig auf Englisch
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('heroDesc').innerText = translations[lang].heroDesc;
+            document.getElementById('titleFeatures').innerText = translations[lang].titleFeatures;
+            document.getElementById('titleScript').innerText = translations[lang].titleScript;
+            document.getElementById('scriptLabel').innerText = translations[lang].scriptLabel;
+            document.getElementById('copyBtn').innerText = translations[lang].copyBtn;
+            document.getElementById('premiumTitle').innerText = translations[lang].premiumTitle;
+            document.getElementById('premiumDesc').innerText = translations[lang].premiumDesc;
+        }
+
         function copyScript() {
             const codeText = document.getElementById('scriptCode').innerText;
             const btn = document.getElementById('copyBtn');
@@ -336,18 +396,18 @@
 
             navigator.clipboard.writeText(codeText).then(() => {
                 btn.classList.add('copied');
-                btn.innerText = 'Kopiert! ✅';
+                btn.innerText = translations[currentLang].copySuccess;
                 
                 setTimeout(() => {
                     btn.classList.remove('copied');
-                    btn.innerText = 'Copy Script';
+                    btn.innerText = translations[currentLang].copyBtn;
                 }, 2000);
             }).catch(err => {
                 btn.classList.add('copied');
-                btn.innerText = 'Kopiert! ✅';
+                btn.innerText = translations[currentLang].copySuccess;
                 setTimeout(() => {
                     btn.classList.remove('copied');
-                    btn.innerText = 'Copy Script';
+                    btn.innerText = translations[currentLang].copyBtn;
                 }, 2000);
             });
         }
